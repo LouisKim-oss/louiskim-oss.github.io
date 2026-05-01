@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Louis Kim — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --surface: #ffffff;
+      --text-primary: #1a1a18;
+      --text-secondary: #5a5a56;
+      --text-tertiary: #9a9a94;
+      --border-strong: rgba(26,26,24,0.25);
+      --border-mid: rgba(26,26,24,0.12);
+      --border-soft: rgba(26,26,24,0.07);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111110;
+        --surface: #1c1c1a;
+        --text-primary: #f0f0ec;
+        --text-secondary: #a0a09a;
+        --text-tertiary: #606058;
+        --border-strong: rgba(240,240,236,0.25);
+        --border-mid: rgba(240,240,236,0.12);
+        --border-soft: rgba(240,240,236,0.07);
+      }
+    }
+
+    html { background: var(--bg); }
+
+    body {
+      font-family: 'Newsreader', Georgia, serif;
+      color: var(--text-primary);
+      background: var(--bg);
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      border-bottom: 1px solid var(--border-strong);
+      padding: 4rem 0 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(48px, 8vw, 72px);
+      line-height: 1.02;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      font-weight: 300;
+      max-width: 560px;
+    }
+
+    .hero-links {
+      margin-top: 2rem;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .hero-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-strong);
+      padding-bottom: 2px;
+      letter-spacing: 0.05em;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .hero-link:hover {
+      color: var(--text-secondary);
+      border-color: var(--border-mid);
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 0.5px solid var(--border-soft);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Projects ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-mid);
+      border: 0.5px solid var(--border-mid);
+    }
+
+    @media (max-width: 560px) {
+      .project-grid { grid-template-columns: 1fr; }
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 1.5rem;
+    }
+
+    .project-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text-tertiary);
+      margin-bottom: 0.85rem;
+    }
+
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      border: 0.5px solid var(--border-strong);
+      color: var(--text-secondary);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .skill-group-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.6rem;
+    }
+
+    .skill-list {
+      font-size: 15px;
+      line-height: 2;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    /* ── Education ── */
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .edu-school {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    .edu-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+    }
+
+    .edu-degree {
+      font-size: 15px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-top: 0.35rem;
+    }
+
+    /* ── Contact ── */
+    .contact-row {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+
+    .contact-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .contact-item a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--border-mid);
+    }
+
+    .contact-item a:hover {
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-eyebrow">Portfolio — Finance &amp; Business Analytics</div>
+    <div class="hero-name">Louis<br><em>Kim</em></div>
+    <div class="hero-desc">Business Economics student with experience in revenue analysis, data visualization, and quantitative research. Passionate about turning complex datasets into actionable business insights.</div>
+    <div class="hero-links">
+      <a class="hero-link" href="https://linkedin.com/in/louiskim" target="_blank">LinkedIn</a>
+      <a class="hero-link" href="resume.pdf" target="_blank">Resume</a>
+      <a class="hero-link" href="mailto:louis.kim@email.com">Email</a>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="section">
+    <div class="section-label">Selected Work</div>
+    <div class="project-grid">
+
+      <div class="project-card">
+        <div class="project-number">01</div>
+        <div class="project-title">Revenue Performance Dashboard</div>
+        <div class="project-desc">Built an automated reporting tool tracking KPIs across business segments. Reduced manual reporting time by 70% through dynamic Excel models with real-time pivot analysis.</div>
+        <div class="tag-row">
+          <span class="tag">Excel</span>
+          <span class="tag">Pivot Tables</span>
+          <span class="tag">KPI Reporting</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">02</div>
+        <div class="project-title">Ad Revenue Segment Analysis</div>
+        <div class="project-desc">Analyzed ad spend efficiency across three business verticals using SQL queries and cohort analysis. Identified a 14% margin improvement opportunity through channel reallocation.</div>
+        <div class="tag-row">
+          <span class="tag">SQL</span>
+          <span class="tag">Cohort Analysis</span>
+          <span class="tag">Ad Tech</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">03</div>
+        <div class="project-title">Market Sizing &amp; Competitor Study</div>
+        <div class="project-desc">Conducted a bottom-up TAM analysis for an emerging fintech vertical. Presented findings and go-to-market recommendations to a panel of five senior stakeholders.</div>
+        <div class="tag-row">
+          <span class="tag">Market Research</span>
+          <span class="tag">TAM Analysis</span>
+          <span class="tag">Slides</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">04</div>
+        <div class="project-title">Pricing Sensitivity Model</div>
+        <div class="project-desc">Built a scenario-based pricing model examining elasticity across customer tiers. Used regression analysis in Google Sheets to project revenue impact under three strategic scenarios.</div>
+        <div class="tag-row">
+          <span class="tag">Google Sheets</span>
+          <span class="tag">Regression</span>
+          <span class="tag">Pricing Strategy</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div class="section">
+    <div class="section-label">Skills</div>
+    <div class="skills-grid">
+      <div>
+        <div class="skill-group-title">Data &amp; Analysis</div>
+        <div class="skill-list">
+          SQL (intermediate)<br>
+          Excel / Google Sheets<br>
+          Pivot Tables<br>
+          Regression Analysis
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Communication</div>
+        <div class="skill-list">
+          Google Slides<br>
+          Executive Presentations<br>
+          Cross-functional Collab<br>
+          Data Storytelling
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Domain Knowledge</div>
+        <div class="skill-list">
+          Financial Modeling<br>
+          Revenue Operations<br>
+          Market Research<br>
+          Ad Tech Ecosystems
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="section">
+    <div class="section-label">Education</div>
+    <div class="edu-row">
+      <div>
+        <div class="edu-school">University Name</div>
+        <div class="edu-degree">B.S. Business Economics · Expected May 2026</div>
+      </div>
+      <div class="edu-meta">GPA: X.X</div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="section">
+    <div class="section-label">Contact</div>
+    <div class="contact-row">
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-item"><a href="mailto:louis.kim@email.com">louis.kim@email.com</a></div>
+      </div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-item"><a href="https://linkedin.com/in/louiskim" target="_blank">linkedin.com/in/louiskim</a></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
